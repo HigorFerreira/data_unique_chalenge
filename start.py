@@ -17,10 +17,6 @@ app.layout = html.Div([
         html.Img(src='assets/logo.png')
     ], className="header"),
     html.Div([
-        # dcc.Loading(
-        #     id="loading",
-
-        # ),
         dcc.Tabs(id="tabs", children=[
             dcc.Tab(label="Análise", children=[
                 html.Div([
