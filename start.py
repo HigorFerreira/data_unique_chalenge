@@ -1,7 +1,7 @@
 from template.dash import Dash
 import dash_core_components as dcc
 import dash_html_components as html
-from dash.dependencies import Input, Output
+from dash.dependencies import Input, Output, State
 import pandas as pd
 import plotly.express as px
 from database_config.engine import engine
@@ -10,23 +10,14 @@ from modules.Layout import Row, RowElement, Column, ColumnElement, Table
 
 programs = pd.read_sql("programm", engine)
 
-app = Dash(__name__,
-                meta_tags=[
-                    {
-                        'name': 'viewport',
-                        'content': 'width=device-width, initial-scale=1.0'
-                    }
-                ],
-                external_stylesheets=[
-                    'https://codepen.io/chriddyp/pen/bWLwgP.css',
-                ])
+app = Dash(__name__)
 
 app.layout = html.Div([
     html.Div([
         html.Img(src='assets/logo.png')
     ], className="header"),
     html.Div([
-        dcc.Tabs([
+        dcc.Tabs(id="tabs", children=[
             dcc.Tab(label="Análise", children=[
                 html.Div([
                     html.Div([

@@ -21,6 +21,7 @@ We'll need to install the python package manager to install some python dependen
 ```console
 	pip install dash
 	pip install pandas
+	pip install sqlalchemy
 ```
 
 ## Configuring Database
