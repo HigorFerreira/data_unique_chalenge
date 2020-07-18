@@ -1,0 +1,63 @@
+body{
+    margin: 0;
+    padding: 8px;
+}
+
+.row2 {
+    display: flex;
+    gap: 5px;
+}
+
+.row-element2 {
+    flex: 1;
+}
+
+.column2 {
+    display: flex;
+    flex-direction: column;
+}
+
+.column-element2 {
+    flex: 1;
+}
+
+#data-analysis-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: repeat(3, auto);
+    grid-gap: 5px;
+    grid-template-areas:
+        "program students"
+        "grade grade"
+        "courses courses";
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+#program-list-container {
+    grid-area: program;
+}
+
+#students-list-container {
+    grid-area: students;
+}
+
+#grade-means-report-container{
+    grid-area: grade;
+}
+
+#courses-container{
+    grid-area: courses;
+}
+
+/* @media screen and (max-width: 425px) {
+    #data-analysis-container {
+        grid-template-columns: auto;
+        grid-template-rows: repeat(3, auto);
+        grid-template-areas:
+        "program"
+        "students"
+        "grade"
+        "courses";
+    }
+} */
