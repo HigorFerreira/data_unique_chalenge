@@ -22,51 +22,56 @@ app = dash.Dash(__name__,
                 ])
 
 app.layout = html.Div([
-    dcc.Tabs([
-        dcc.Tab(label="Análise", children=[
-            html.Div([
+    html.Div([
+        html.Img(src='assets/logo.png')
+    ], className="header"),
+    html.Div([
+        dcc.Tabs([
+            dcc.Tab(label="Análise", children=[
                 html.Div([
-                    Column([
-                        ColumnElement([
-                            html.H4("Cursos")
-                        ]),
-                        ColumnElement([
-                            RowElement([
-                                dcc.Dropdown(
-                                    "program-list",
-                                    [{'label': element[1], 'value': element[0]}
-                                     for element in programs.values.tolist()],
-                                    value=20
-                                )
+                    html.Div([
+                        Column([
+                            ColumnElement([
+                                html.H4("Cursos")
                             ]),
-                        ])
-                    ],),
-                ], id="program-list-container"),
+                            ColumnElement([
+                                RowElement([
+                                    dcc.Dropdown(
+                                        "program-list",
+                                        [{'label': element[1], 'value': element[0]}
+                                         for element in programs.values.tolist()],
+                                        value=20
+                                    )
+                                ]),
+                            ])
+                        ],),
+                    ], id="program-list-container"),
 
-                html.Div([
-                    Column([
-                        ColumnElement([
-                            html.H4("Alunos Matriculados")
+                    html.Div([
+                        Column([
+                            ColumnElement([
+                                html.H4("Alunos Matriculados")
+                            ]),
+                            ColumnElement([
+                                dcc.Dropdown("student-list",
+                                             placeholder="Selecione o estudante")
+                            ])
                         ]),
-                        ColumnElement([
-                            dcc.Dropdown("student-list",
-                                         placeholder="Selecione o estudante")
-                        ])
-                    ]),
-                ], id="students-list-container"),
+                    ], id="students-list-container"),
 
-                html.Div(id="grade-means-report-container"),
-                html.Div(id="courses-container"),
-                html.Div(id="extra"),
+                    html.Div(id="grade-means-report-container"),
+                    html.Div(id="courses-container"),
+                    html.Div(id="extra"),
 
-            ], id="data-analysis-container"),
+                ], id="data-analysis-container"),
 
-            html.Div(id="test"),
-        ]),
-        dcc.Tab(label="Inserção", children=[
-            html.H1("hello")
+                html.Div(id="test"),
+            ]),
+            dcc.Tab(label="Inserção", children=[
+                html.H1("hello")
+            ])
         ])
-    ])
+    ], style={ 'padding': '0 8px' }),
 
 ], id="main-container")
 
@@ -134,7 +139,8 @@ def student_selected(value):
         html.H4("Statísticas"),
         html.P("Nota mais baixa: {}".format(statistics['mean']['min'])),
         html.P("Nota mais alta: {}".format(statistics['mean']['max'])),
-        html.P("Média global: {}".format(round(statistics['mean']['mean'], 2))),
+        html.P("Média global: {}".format(
+            round(statistics['mean']['mean'], 2))),
     ], style={
         'backgroundColor': '#8395a7',
         'padding': '15px 40px',

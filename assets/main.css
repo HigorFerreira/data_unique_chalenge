@@ -1,6 +1,18 @@
 body{
     margin: 0;
-    padding: 8px;
+}
+
+.header{
+    background-color: #273240;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+    margin-bottom: 30px;
+}
+
+.header img{
+    height: 60px;
 }
 
 .row2 {
