@@ -33,6 +33,11 @@ body{
     flex: 1;
 }
 
+#input-data-container{
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
 #data-analysis-container {
     display: grid;
     grid-template-columns: 50% 50%;

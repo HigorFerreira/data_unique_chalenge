@@ -1,4 +1,4 @@
-import dash
+from template.dash import Dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
@@ -10,7 +10,7 @@ from modules.Layout import Row, RowElement, Column, ColumnElement, Table
 
 programs = pd.read_sql("programm", engine)
 
-app = dash.Dash(__name__,
+app = Dash(__name__,
                 meta_tags=[
                     {
                         'name': 'viewport',
@@ -68,7 +68,10 @@ app.layout = html.Div([
                 html.Div(id="test"),
             ]),
             dcc.Tab(label="Inserção", children=[
-                html.H1("hello")
+                html.Div(id="input-data-container", children=[
+                    html.H3("TODO:"),
+                    html.P("Create forms to add data to database"),
+                ])
             ])
         ])
     ], style={ 'padding': '0 8px' }),
