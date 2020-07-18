@@ -6,7 +6,7 @@
 This simple Dash based app is a part of an challenge requested by data unique branch.
 
 ## Get Started
-This get started refers a **Linux** environment.
+This get started refers to a **Linux** environment.
 Before Continue, make sure you have your environment correctly setted up with all dependencies installed.
 This project depends on:
 1. Python installation
@@ -17,7 +17,7 @@ This project depends on:
 	* [Install Postgre](https://www.postgresql.org/download/)
 
 #### Pip
-We'll need install the python package manager to install some python dependencies in which this project depends on. After installing [it](https://pip.pypa.io/en/stable/installing/) , run these commands to install python dependencies:
+We'll need to install the python package manager to install some python dependencies in which this project depends on. After installing [it](https://pip.pypa.io/en/stable/installing/) , run these commands to install python dependencies:
 ```console
 	pip install dash
 	pip install pandas
@@ -25,7 +25,7 @@ We'll need install the python package manager to install some python dependencie
 
 ## Configuring Database
 
-To create our database schema, we'll need some environment variables to have been setted up, ir wich are:
+To create our database schema, we'll need some environment variables to have been setted up, it wich are:
 * DB_USER
 * DB_PASS
 * DB_PORT
