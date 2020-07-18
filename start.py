@@ -6,7 +6,7 @@ import pandas as pd
 import plotly.express as px
 from database_config.engine import engine
 
-from modules.Layout import Row, RowElement, Column, ColumnElement
+from modules.Layout import Row, RowElement, Column, ColumnElement, Table
 
 programs = pd.read_sql("programm", engine)
 
@@ -57,11 +57,7 @@ app.layout = html.Div([
             
         ], id="grade-means-report-container"),
 
-        html.Div([
-            Column([
-                html.H6("Todas as matérias cursadas", id="output")
-            ])
-        ], id="courses-container")
+        html.Div(id="courses-container"),
 
     ], id="data-analysis-container"),
 
@@ -91,7 +87,10 @@ def program_selected(program_id):
 
 
 @app.callback(
-    Output("grade-means-report-container", "children"),
+    [
+        Output("grade-means-report-container", "children"),
+        Output("courses-container", "children")
+    ],
     [Input("student-list", "value")],
     prevent_initial_call=True
 )
@@ -102,6 +101,10 @@ def student_selected(value):
         where student_id={}
     '''.format(value), engine)
 
+    courses = student.drop(columns=["id", "student_id", "course_id", "first_name", "last_name", "subject", "mean"])
+    courses = courses.rename(columns={
+        'course': 'Matéria', 'semester_no': 'Semestre', 'year': 'Ano'
+    })
     student = student.drop(columns=["id", "student_id", "course_id"])
 
     fig = px.line(student, x=range(0, len(student)), y="mean",
@@ -113,11 +116,12 @@ def student_selected(value):
     # The use of dcc.Graph in the main layout causes an unrecognezed error
     # on CSS grid layout. Keeping this in mind, i'll return the entire Graph
     # from here
-    return dcc.Graph(
-                "student-report",
-                True,
-                figure=fig
-            ),
+    graph_layout = dcc.Graph("student-report", True, figure=fig)
+    courses_layout = html.Div([
+        html.H6("Todas as matérias feitas"),
+        Table(courses),
+    ])
+    return  graph_layout, courses_layout
 
 # @app.callback(
 #     Output("test", "children"),

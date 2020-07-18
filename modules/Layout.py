@@ -21,3 +21,15 @@ def ColumnElement(children, flex=1, style=dict()):
     _style = { 'flex': flex }
     _style.update(style)
     return html.Div(children, className="column-element2", style=_style)
+
+def Table(dataframe):
+    return html.Table([
+        html.Thead(
+            html.Tr([ html.Th(col) for col in dataframe.columns ]),
+        ),
+        html.Tbody([
+            html.Tr([
+                html.Td(dataframe.iloc[i][col]) for col in dataframe.columns
+            ]) for i in range(0, len(dataframe))
+        ])
+    ])
