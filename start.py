@@ -22,46 +22,53 @@ app = dash.Dash(__name__,
                 )
 
 app.layout = html.Div([
-    html.Div([
-        html.Div([
-            Column([
-                ColumnElement([
-                    html.H4("Cursos")
-                ]),
-                ColumnElement([
-                    RowElement([
-                        dcc.Dropdown(
-                            "program-list",
-                            [{'label': element[1], 'value': element[0]}
-                                for element in programs.values.tolist()],
-                            value=20
-                        )
+    dcc.Tabs([
+        dcc.Tab(label="Análise", children=[
+            html.Div([
+                html.Div([
+                    Column([
+                        ColumnElement([
+                            html.H4("Cursos")
+                        ]),
+                        ColumnElement([
+                            RowElement([
+                                dcc.Dropdown(
+                                    "program-list",
+                                    [{'label': element[1], 'value': element[0]}
+                                     for element in programs.values.tolist()],
+                                    value=20
+                                )
+                            ]),
+                        ])
+                    ],),
+                ], id="program-list-container"),
+
+                html.Div([
+                    Column([
+                        ColumnElement([
+                            html.H4("Alunos Matriculados")
+                        ]),
+                        ColumnElement([
+                            dcc.Dropdown("student-list",
+                                         placeholder="Selecione o estudante")
+                        ])
                     ]),
-                ])
-            ],),
-        ], id="program-list-container"),
+                ], id="students-list-container"),
 
-        html.Div([
-            Column([
-                ColumnElement([
-                    html.H4("Alunos Matriculados")
-                ]),
-                ColumnElement([
-                    dcc.Dropdown("student-list",
-                                 placeholder="Selecione o estudante")
-                ])
-            ]),
-        ], id="students-list-container"),
+                html.Div([
 
-        html.Div([
-            
-        ], id="grade-means-report-container"),
+                ], id="grade-means-report-container"),
 
-        html.Div(id="courses-container"),
+                html.Div(id="courses-container"),
 
-    ], id="data-analysis-container"),
+            ], id="data-analysis-container"),
 
-    html.Div(id="test"),
+            html.Div(id="test"),
+        ]),
+        dcc.Tab(label="Inserção", children=[
+            html.H1("hello")
+        ])
+    ])
 
 ], id="main-container")
 
@@ -101,7 +108,8 @@ def student_selected(value):
         where student_id={}
     '''.format(value), engine)
 
-    courses = student.drop(columns=["id", "student_id", "course_id", "first_name", "last_name", "subject", "mean"])
+    courses = student.drop(columns=[
+                           "id", "student_id", "course_id", "first_name", "last_name", "subject", "mean"])
     courses = courses.rename(columns={
         'course': 'Matéria', 'semester_no': 'Semestre', 'year': 'Ano'
     })
@@ -121,7 +129,7 @@ def student_selected(value):
         html.H6("Todas as matérias feitas"),
         Table(courses),
     ])
-    return  graph_layout, courses_layout
+    return graph_layout, courses_layout
 
 # @app.callback(
 #     Output("test", "children"),
