@@ -55,11 +55,9 @@ app.layout = html.Div([
                     ]),
                 ], id="students-list-container"),
 
-                html.Div([
-
-                ], id="grade-means-report-container"),
-
+                html.Div(id="grade-means-report-container"),
                 html.Div(id="courses-container"),
+                html.Div(id="extra"),
 
             ], id="data-analysis-container"),
 
@@ -96,7 +94,8 @@ def program_selected(program_id):
 @app.callback(
     [
         Output("grade-means-report-container", "children"),
-        Output("courses-container", "children")
+        Output("courses-container", "children"),
+        Output("extra", "children"),
     ],
     [Input("student-list", "value")],
     prevent_initial_call=True
@@ -107,6 +106,8 @@ def student_selected(value):
         select * from semester_reports
         where student_id={}
     '''.format(value), engine)
+
+    statistics = student.describe()
 
     courses = student.drop(columns=[
                            "id", "student_id", "course_id", "first_name", "last_name", "subject", "mean"])
@@ -126,10 +127,20 @@ def student_selected(value):
     # from here
     graph_layout = dcc.Graph("student-report", True, figure=fig)
     courses_layout = html.Div([
-        html.H5("Todas as matérias feitas"),
+        html.H4("Todas as matérias feitas"),
         Table(courses),
     ])
-    return graph_layout, courses_layout
+    extra_data_layout = html.Div([
+        html.H4("Statísticas"),
+        html.P("Nota mais baixa: {}".format(statistics['mean']['min'])),
+        html.P("Nota mais alta: {}".format(statistics['mean']['max'])),
+        html.P("Média global: {}".format(round(statistics['mean']['mean'], 2))),
+    ], style={
+        'backgroundColor': '#8395a7',
+        'padding': '15px 40px',
+        'borderRadius': '10px',
+    })
+    return graph_layout, courses_layout, extra_data_layout,
 
 # @app.callback(
 #     Output("test", "children"),

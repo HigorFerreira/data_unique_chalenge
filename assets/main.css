@@ -29,6 +29,7 @@ body{
     grid-template-areas:
         "program students"
         "grade grade"
+        "extra extra"
         "courses courses";
     max-width: 1000px;
     margin: 0 auto;
@@ -48,6 +49,20 @@ body{
 
 #courses-container{
     grid-area: courses;
+    padding: 15px 40px;
+    margin-top: 20px;
+}
+
+#extra{
+    grid-area: extra;
+}
+
+#extra h4{
+    color: white;
+}
+
+#extra p{
+    color: white;
 }
 
 .tab-container{
@@ -81,6 +96,7 @@ body{
         "program"
         "students"
         "grade"
+        "extra"
         "courses";
     }
 }
