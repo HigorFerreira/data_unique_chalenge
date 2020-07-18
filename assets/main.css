@@ -50,7 +50,30 @@ body{
     grid-area: courses;
 }
 
-/* @media screen and (max-width: 425px) {
+.tab-container{
+
+}
+
+.tab-container .tab{
+    padding: 10px !important;
+}
+
+.tab-container .tab span{
+    font-family: Roboto;
+    text-transform: uppercase;
+    font-weight: bold;
+    
+}
+
+.tab-container .tab .tab--selected{
+    
+}
+
+.tab-content{
+    margin-top: 60px;
+}
+
+@media screen and (max-width: 425px) {
     #data-analysis-container {
         grid-template-columns: auto;
         grid-template-rows: repeat(3, auto);
@@ -60,4 +83,4 @@ body{
         "grade"
         "courses";
     }
-} */
+}

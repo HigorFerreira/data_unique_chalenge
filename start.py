@@ -18,8 +18,8 @@ app = dash.Dash(__name__,
                     }
                 ],
                 external_stylesheets=[
-                    'https://codepen.io/chriddyp/pen/bWLwgP.css']
-                )
+                    'https://codepen.io/chriddyp/pen/bWLwgP.css',
+                ])
 
 app.layout = html.Div([
     dcc.Tabs([
@@ -126,7 +126,7 @@ def student_selected(value):
     # from here
     graph_layout = dcc.Graph("student-report", True, figure=fig)
     courses_layout = html.Div([
-        html.H6("Todas as matérias feitas"),
+        html.H5("Todas as matérias feitas"),
         Table(courses),
     ])
     return graph_layout, courses_layout
