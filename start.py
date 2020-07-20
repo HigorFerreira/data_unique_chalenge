@@ -192,8 +192,8 @@ def student_selected(value):
         Input("send-button", "n_clicks")
     ]
 )
-def sending_forms():
-    print("You clicked in")
+def sending_forms(clicks):
+    print("You clicked in", clicks)
     return ""
 
 
