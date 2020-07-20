@@ -188,13 +188,27 @@ def student_selected(value):
 
 @app.callback(
     Output("tests", "children"),
+    [ Input("send-button", "n_clicks") ],
     [
-        Input("send-button", "n_clicks")
+        State("program-list-input", "value"),
+        State("student-no", "value"),
+        State("fname", "value"),
+        State("lname", "value"),
     ],
     prevent_initial_call=True
 )
-def sending_forms(clicks):
-    print("You clicked in", clicks)
+def sending_forms(clicks, program, no, name, lname):
+    print('''
+    INSERTED DATA
+    Name: {name} {lname}
+    No: {no}
+    P Code: {program}
+    '''.format(
+        name=name,
+        lname=lname,
+        program=program,
+        no=no
+    ))
     return ""
 
 
