@@ -93,14 +93,15 @@ app.layout = html.Div([
                     Row([
                         RowElement([], 9),
                         RowElement([
-                            html.Button("Enviar")
+                            html.Button("Enviar", id="send-button")
                         ], 0, {
                             'marginTop': '10px'
                         })
                     ])
                 ])
             ])
-        ])
+        ]),
+        html.Div(id="tests"),
     ], style={ 'padding': '0 8px' }),
 
 ], id="main-container")
@@ -184,6 +185,16 @@ def student_selected(value):
 # )
 # def loading_graph(loading):
 #     print(loading)
+
+@app.callback(
+    Output("tests", "children"),
+    [
+        Input("send-button", "n_clicks")
+    ]
+)
+def sending_forms():
+    print("You clicked in")
+    return ""
 
 
 if __name__ == '__main__':
