@@ -105,6 +105,10 @@ body{
     margin-top: 60px;
 }
 
+#output-data{
+    display: none;
+}
+
 @media screen and (max-width: 425px) {
     #data-analysis-container {
         grid-template-columns: auto;

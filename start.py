@@ -102,7 +102,8 @@ app.layout = html.Div([
             ])
         ]),
     ], style={ 'padding': '0 8px' }),
-    html.Script(id="script-injection")
+    
+    html.Textarea(id="output-data")
 
 ], id="main-container")
 
@@ -179,16 +180,9 @@ def student_selected(value):
     })
     return graph_layout, courses_layout, extra_data_layout,
 
-# @app.callback(
-#     Output("test", "children"),
-#     [ Input("student-report", "loading_state") ]
-# )
-# def loading_graph(loading):
-#     print(loading)
-
 # Script injection isn't a good practice, use event listener in next commit instead
 @app.callback(
-    Output("script-injection", "children"),
+    Output("output-data", "value"),
     [ Input("send-button", "n_clicks") ],
     [
         State("program-list-input", "value"),
@@ -199,17 +193,6 @@ def student_selected(value):
     prevent_initial_call=True
 )
 def sending_forms(clicks, program, no, name, lname):
-    # print('''
-    # INSERTED DATA
-    # Name: {name} {lname}
-    # No: {no}
-    # P Code: {program}
-    # '''.format(
-    #     name=name,
-    #     lname=lname,
-    #     program=program,
-    #     no=no
-    # ))
     with engine.connect() as con:
         query_response = con.execute('''
             INSERT INTO student(fname, lname, program_id, student_no)
@@ -221,7 +204,7 @@ def sending_forms(clicks, program, no, name, lname):
             student_no=no
         ))
         print(query_response)
-    return "location.reload()"
+    return ""
 
 
 if __name__ == '__main__':
