@@ -60,8 +60,44 @@ app.layout = html.Div([
             ]),
             dcc.Tab(label="Inserção", children=[
                 html.Div(id="input-data-container", children=[
-                    html.H3("TODO:"),
-                    html.P("Create forms to add data to database"),
+                    html.H3("Cadastro de Estudante:"),
+                    Row([
+                        Column([
+                            html.H6("Curso"),
+                            dcc.Dropdown(
+                                "program-list-input",
+                                [{'label': element[1], 'value': element[0]} for element in programs.values.tolist()],
+                            )
+                        ])
+                    ]),
+                    Row([
+                        RowElement([
+                            Column([
+                                html.H6("Nome"),
+                                dcc.Input(id="fname", placeholder="Digite o seu nome")
+                            ]),
+                        ], 6),
+                        RowElement([
+                            Column([
+                                html.H6("Matrícula"),
+                                dcc.Input(id="student-no", placeholder="A matrícula do estudante", type="number")
+                            ]),
+                        ], 3)
+                    ]),
+                    Row([
+                        Column([
+                            html.H6("Sobrenome"),
+                            dcc.Input(id="lname", placeholder="Digite o seu sobrenome")
+                        ]),
+                    ]),
+                    Row([
+                        RowElement([], 9),
+                        RowElement([
+                            html.Button("Enviar")
+                        ], 0, {
+                            'marginTop': '10px'
+                        })
+                    ])
                 ])
             ])
         ])
@@ -151,4 +187,4 @@ def student_selected(value):
 
 
 if __name__ == '__main__':
-    app.run_server()
+    app.run_server(port=3001)
