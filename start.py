@@ -190,7 +190,8 @@ def student_selected(value):
     Output("tests", "children"),
     [
         Input("send-button", "n_clicks")
-    ]
+    ],
+    prevent_initial_call=True
 )
 def sending_forms(clicks):
     print("You clicked in", clicks)
