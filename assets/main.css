@@ -41,15 +41,17 @@ body{
 #data-analysis-container {
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-template-rows: repeat(3, auto);
+    grid-template-rows: repeat(2, auto);
     grid-gap: 5px;
     grid-template-areas:
         "program students"
-        "grade grade"
-        "extra extra"
-        "courses courses";
+        "data data";
     max-width: 1000px;
     margin: 0 auto;
+}
+
+#students-list-container + div{
+    grid-area: data;
 }
 
 #program-list-container {
@@ -116,8 +118,6 @@ body{
         grid-template-areas:
         "program"
         "students"
-        "grade"
-        "extra"
-        "courses";
+        "data";
     }
 }

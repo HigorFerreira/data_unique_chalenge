@@ -50,9 +50,11 @@ app.layout = html.Div([
                         ]),
                     ], id="students-list-container"),
 
-                    html.Div(id="grade-means-report-container"),
-                    html.Div(id="courses-container"),
-                    html.Div(id="extra"),
+                    dcc.Loading(id="data-container", children=[
+                        html.Div(id="grade-means-report-container"),
+                        html.Div(id="extra"),
+                        html.Div(id="courses-container"),
+                    ])
 
                 ], id="data-analysis-container"),
 
@@ -168,7 +170,7 @@ def student_selected(value):
         Table(courses),
     ])
     extra_data_layout = html.Div([
-        html.H4("Statísticas"),
+        html.H4("Estatísticas"),
         html.P("Nota mais baixa: {}".format(statistics['mean']['min'])),
         html.P("Nota mais alta: {}".format(statistics['mean']['max'])),
         html.P("Média global: {}".format(
